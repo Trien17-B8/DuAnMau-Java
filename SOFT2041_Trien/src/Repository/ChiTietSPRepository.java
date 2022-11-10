@@ -154,20 +154,17 @@ public class ChiTietSPRepository implements IChiTietSPRepository {
         return check > 0;
     }
 
-    public static void main(String[] args) {
-        
-        System.out.println(new ChiTietSPRepository().getFrmBH());
-    }
+    
 
     @Override
     public List<ChiTietSP> getFrmBH() {
         String query = "SELECT dbo.SanPham.Ma, dbo.SanPham.Ten, dbo.ChiTietSP.NamBH, dbo.ChiTietSP.MoTa, dbo.ChiTietSP.SoLuongTon, dbo.ChiTietSP.GiaNhap, dbo.ChiTietSP.GiaBan "
                 + "FROM     dbo.ChiTietSP INNER JOIN "
                 + "                  dbo.SanPham ON dbo.ChiTietSP.IdSP = dbo.SanPham.Id";
-        try(Connection con = SQLServerConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             List<ChiTietSP> listFrmBanHang = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 SanPham sp = new SanPham(rs.getString(1), rs.getString(2));
                 ChiTietSP ctsp = new ChiTietSP(sp, rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getDouble(6), rs.getDouble(7));
                 listFrmBanHang.add(ctsp);
@@ -178,7 +175,30 @@ public class ChiTietSPRepository implements IChiTietSPRepository {
         }
         return null;
     }
+
+    @Override
+    public List<ChiTietSP> getFrmFinal() {
+        String query = "SELECT        dbo.SanPham.Id, dbo.ChiTietSP.MoTa, dbo.ChiTietSP.SoLuongTon, dbo.ChiTietSP.GiaNhap, dbo.ChiTietSP.GiaBan "
+                + "FROM            dbo.ChiTietSP INNER JOIN "
+                + "                         dbo.SanPham ON dbo.ChiTietSP.IdSP = dbo.SanPham.Id";
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            List<ChiTietSP> listFrmFinal = new ArrayList<>();
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                SanPham sanPham = new SanPham(UUID.fromString(rs.getString(1)));
+                ChiTietSP chiTietSP = new ChiTietSP(sanPham, rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getDouble(5));
+                listFrmFinal.add(chiTietSP);
+            }
+            return listFrmFinal;
+        } catch (SQLException sqle) {
+            sqle.printStackTrace(System.out);
+        }
+        return null;
+    }
     
-    
+    public static void main(String[] args) {
+
+        System.out.println(new ChiTietSPRepository().getFrmFinal());
+    }
 
 }

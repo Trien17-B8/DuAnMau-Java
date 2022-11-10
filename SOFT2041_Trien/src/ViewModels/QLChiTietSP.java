@@ -70,6 +70,14 @@ public class QLChiTietSP {
         this.giaBan = giaBan;
     }
 
+    public QLChiTietSP(QLSanPham idSP, String moTa, int soLuongTon, double giaNhap, double giaBan) {
+        this.idSP = idSP;
+        this.moTa = moTa;
+        this.soLuongTon = soLuongTon;
+        this.giaNhap = giaNhap;
+        this.giaBan = giaBan;
+    }
+
     
 
     public int getStt() {
@@ -159,6 +167,10 @@ public class QLChiTietSP {
     public void setGiaBan(double giaBan) {
         this.giaBan = giaBan;
     }
+    
+    public double giaTonKho(){
+        return giaNhap*soLuongTon;
+    }
 
     public Object[] toDataRow() {
         return new Object[]{id, idSP.getTen(), idNSX.getTen(), idMauSac.getTen(), idDongSP.getTen(), namBH, moTa, soLuongTon, giaNhap, giaBan};
@@ -166,6 +178,10 @@ public class QLChiTietSP {
 
     public Object[] frmDataRow(){
         return new Object[]{stt, idSP.getMa(), idSP.getTen(), namBH,moTa, soLuongTon, giaNhap, giaBan};
+    }
+    
+    public Object[] frmFinal(){
+        return new Object[]{idSP.getId(), moTa, soLuongTon, giaNhap, giaBan, giaTonKho()};
     }
     
     

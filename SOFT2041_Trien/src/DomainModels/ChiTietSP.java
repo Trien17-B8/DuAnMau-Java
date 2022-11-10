@@ -56,6 +56,14 @@ public class ChiTietSP {
         this.giaBan = giaBan;
     }
 
+    public ChiTietSP(SanPham idSP, String moTa, int soLuongTon, double giaNhap, double giaBan) {
+        this.idSP = idSP;
+        this.moTa = moTa;
+        this.soLuongTon = soLuongTon;
+        this.giaNhap = giaNhap;
+        this.giaBan = giaBan;
+    }
+
     public ChiTietSP(UUID id, SanPham idSP) {
         this.id = id;
         this.idSP = idSP;

@@ -26,4 +26,6 @@ public interface IChiTietSPRepository {
     
     List<ChiTietSP> getFrmBH();
     
+    List<ChiTietSP> getFrmFinal();
+    
 }

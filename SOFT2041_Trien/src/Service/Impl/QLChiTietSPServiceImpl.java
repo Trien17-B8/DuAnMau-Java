@@ -92,4 +92,14 @@ public class QLChiTietSPServiceImpl implements QLChiTietSPService {
         return listQLSP ;
     }
 
+    @Override
+    public List<QLChiTietSP> getFrmFinal() {
+        for (ChiTietSP chiTietSP : re.getFrmFinal()) {
+            QLSanPham qLSanPham = new QLSanPham(chiTietSP.getIdSP().getId());
+            QLChiTietSP qlctsp = new QLChiTietSP(qLSanPham, chiTietSP.getMoTa(), chiTietSP.getSoLuongTon(), chiTietSP.getGiaNhap(), chiTietSP.getGiaBan());
+            listQLSP.add(qlctsp);
+        }
+        return listQLSP;
+    }
+
 }

@@ -24,4 +24,6 @@ public interface QLChiTietSPService {
     
     List<QLChiTietSP> getFrmBH();
     
+    List<QLChiTietSP> getFrmFinal();
+    
 }
