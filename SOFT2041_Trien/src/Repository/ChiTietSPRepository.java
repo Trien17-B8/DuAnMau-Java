@@ -154,8 +154,6 @@ public class ChiTietSPRepository implements IChiTietSPRepository {
         return check > 0;
     }
 
-    
-
     @Override
     public List<ChiTietSP> getFrmBH() {
         String query = "SELECT dbo.SanPham.Ma, dbo.SanPham.Ten, dbo.ChiTietSP.NamBH, dbo.ChiTietSP.MoTa, dbo.ChiTietSP.SoLuongTon, dbo.ChiTietSP.GiaNhap, dbo.ChiTietSP.GiaBan "
@@ -195,10 +193,33 @@ public class ChiTietSPRepository implements IChiTietSPRepository {
         }
         return null;
     }
-    
+
+    @Override
+    public boolean insertFinal(ChiTietSP chiTietSP) {
+        String query = "INSERT INTO [dbo].[ChiTietSP] "
+                + "           ([IdSP] "
+                + "           ,[MoTa] "
+                + "           ,[SoLuongTon] "
+                + "           ,[GiaNhap] "
+                + "           ,[GiaBan]) "
+                + "     VALUES "
+                + "           (?,?,?,?,?)";
+        int check = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, chiTietSP.getIdSP().getId());
+            ps.setObject(2, chiTietSP.getMoTa());
+            ps.setObject(3, chiTietSP.getSoLuongTon());
+            ps.setObject(4, chiTietSP.getGiaNhap());
+            ps.setObject(5, chiTietSP.getGiaBan());
+            check = ps.executeUpdate();
+        } catch (SQLException sqle) {
+            sqle.printStackTrace(System.out);
+        }
+        return check >0;
+    }
+
     public static void main(String[] args) {
 
         System.out.println(new ChiTietSPRepository().getFrmFinal());
     }
-
 }

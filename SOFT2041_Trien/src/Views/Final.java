@@ -5,10 +5,15 @@
 package Views;
 
 import Service.Impl.QLChiTietSPServiceImpl;
+import Service.Impl.QLSanPhamServiceImpl;
 import Service.QLChiTietSPService;
+import Service.QLSanPhamService;
 import ViewModels.QLChiTietSP;
+import ViewModels.QLSanPham;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,6 +24,8 @@ public class Final extends javax.swing.JFrame {
     private List<QLChiTietSP> listQLChiTietSP = new ArrayList<>();
     private QLChiTietSPService qLChiTietSPService = new QLChiTietSPServiceImpl();
     private DefaultTableModel dtm = new DefaultTableModel();
+    private List<QLSanPham> qLSanPhams = new ArrayList<>();
+    private QLSanPhamService qLSanPhamService = new QLSanPhamServiceImpl();
     
 
     /**
@@ -29,8 +36,9 @@ public class Final extends javax.swing.JFrame {
         jTable1.setModel(dtm);
         String[] header = {"ID SP", "Mo ta", "So luong ton", "Gia nhap", "Gia ban", "GT ton kho"};
         dtm.setColumnIdentifiers(header);
-        listQLChiTietSP = qLChiTietSPService.getAll();
-        showData(listQLChiTietSP);
+        qLSanPhams = qLSanPhamService.getAll();
+        listQLChiTietSP = qLChiTietSPService.getFrmFinal();
+        addCbbSanPham();
     }
 
     /**
@@ -49,18 +57,18 @@ public class Final extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         btnThem = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        txtSoLuongTon = new javax.swing.JTextField();
+        txtGiaNhap = new javax.swing.JTextField();
+        txtGiaBan = new javax.swing.JTextField();
+        txtMoTa = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnShow = new javax.swing.JButton();
+        cbbIdSanPham = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Id");
+        jLabel1.setText("San Pham");
 
         jLabel2.setText("Mo ta");
 
@@ -95,6 +103,11 @@ public class Final extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         btnShow.setText("Show");
@@ -116,23 +129,23 @@ public class Final extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtMoTa, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtSoLuongTon, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(cbbIdSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 832, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -151,7 +164,7 @@ public class Final extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbbIdSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
@@ -159,19 +172,19 @@ public class Final extends javax.swing.JFrame {
                         .addGap(27, 27, 27))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtMoTa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSoLuongTon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem)
@@ -186,7 +199,19 @@ public class Final extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
+        String moTa = txtMoTa.getText().trim();
+        String giaNhap = txtGiaNhap.getText().trim();
+        String giaBan = txtGiaBan.getText().trim();
+        String soLuongTon = txtSoLuongTon.getText().trim();
+        QLSanPham idSP = new QLSanPham(getIdSanPham());
+        if(moTa.length() == 0 ||giaBan.length() == 0 || giaNhap.length() == 0 || soLuongTon.length() == 0){
+            JOptionPane.showMessageDialog(this, "Khong duoc de trong");
+        }else{
+            QLChiTietSP qlctsp = new QLChiTietSP(idSP, moTa, Integer.valueOf(soLuongTon), Double.valueOf(giaBan), Double.valueOf(giaNhap));
+            JOptionPane.showMessageDialog(this, qLChiTietSPService.insertFinal(qlctsp));
+            listQLChiTietSP = qLChiTietSPService.getFrmFinal();
+            showData(listQLChiTietSP);
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -194,15 +219,46 @@ public class Final extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
-        listQLChiTietSP = qLChiTietSPService.getAll();
+        listQLChiTietSP = qLChiTietSPService.getFrmFinal();
         showData(listQLChiTietSP);
     }//GEN-LAST:event_btnShowActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int row = jTable1.getSelectedRow();
+        fillData(row);
+    }//GEN-LAST:event_jTable1MouseClicked
 
     private void showData(List<QLChiTietSP> lChiTietSP){
         dtm.setRowCount(0);
         for (QLChiTietSP x : lChiTietSP) {
-            dtm.addRow(x.frmDataRow());
+            dtm.addRow(x.frmFinal());
         }
+    }
+    
+    private void addCbbSanPham(){
+        for (QLSanPham qlsp : qLSanPhams) {
+            cbbIdSanPham.addItem(qlsp.getTen());
+        }
+    }
+    
+    private UUID getIdSanPham(){
+        String tenSanPham = (String) cbbIdSanPham.getSelectedItem();
+        UUID id = null;
+        for (QLSanPham qlsp : qLSanPhams) {
+            if(qlsp.getTen().equalsIgnoreCase(tenSanPham)){
+                id = qlsp.getId();
+            }
+        }
+        return id; 
+    }
+    
+    private void fillData(int index){
+        QLChiTietSP qlctsp = listQLChiTietSP.get(index);
+        cbbIdSanPham.setSelectedItem(qlctsp.getIdSP().getTen());
+        txtGiaBan.setText(String.valueOf(qlctsp.getGiaBan()));
+        txtGiaNhap.setText(String.valueOf(qlctsp.getGiaNhap()));
+        txtMoTa.setText(qlctsp.getMoTa());
+        txtSoLuongTon.setText(String.valueOf(qlctsp.getSoLuongTon()));
     }
     /**
      * @param args the command line arguments
@@ -243,6 +299,7 @@ public class Final extends javax.swing.JFrame {
     private javax.swing.JButton btnShow;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
+    private javax.swing.JComboBox<String> cbbIdSanPham;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -250,10 +307,9 @@ public class Final extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField txtGiaBan;
+    private javax.swing.JTextField txtGiaNhap;
+    private javax.swing.JTextField txtMoTa;
+    private javax.swing.JTextField txtSoLuongTon;
     // End of variables declaration//GEN-END:variables
 }

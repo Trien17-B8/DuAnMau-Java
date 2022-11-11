@@ -28,4 +28,6 @@ public interface IChiTietSPRepository {
     
     List<ChiTietSP> getFrmFinal();
     
+    boolean insertFinal(ChiTietSP chiTietSP);
+    
 }

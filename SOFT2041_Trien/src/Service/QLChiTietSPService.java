@@ -26,4 +26,6 @@ public interface QLChiTietSPService {
     
     List<QLChiTietSP> getFrmFinal();
     
+    String insertFinal(QLChiTietSP qlctsp);
+    
 }

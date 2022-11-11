@@ -94,12 +94,24 @@ public class QLChiTietSPServiceImpl implements QLChiTietSPService {
 
     @Override
     public List<QLChiTietSP> getFrmFinal() {
+        listQLSP.clear();
         for (ChiTietSP chiTietSP : re.getFrmFinal()) {
             QLSanPham qLSanPham = new QLSanPham(chiTietSP.getIdSP().getId());
             QLChiTietSP qlctsp = new QLChiTietSP(qLSanPham, chiTietSP.getMoTa(), chiTietSP.getSoLuongTon(), chiTietSP.getGiaNhap(), chiTietSP.getGiaBan());
             listQLSP.add(qlctsp);
         }
         return listQLSP;
+    }
+
+    @Override
+    public String insertFinal(QLChiTietSP qlctsp) {
+        SanPham qlsp = new SanPham(qlctsp.getIdSP().getId());
+        ChiTietSP chiTietSP = new ChiTietSP(qlsp, qlctsp.getMoTa(), qlctsp.getSoLuongTon(), qlctsp.getGiaNhap(), qlctsp.getGiaBan());
+        if(re.insertFinal(chiTietSP)){
+            return "Thanh cong";
+        }else{
+            return "That Bai";
+        }
     }
 
 }
