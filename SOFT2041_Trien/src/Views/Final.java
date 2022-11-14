@@ -21,12 +21,12 @@ import javax.swing.table.DefaultTableModel;
  * @author Admin
  */
 public class Final extends javax.swing.JFrame {
+
     private List<QLChiTietSP> listQLChiTietSP = new ArrayList<>();
     private QLChiTietSPService qLChiTietSPService = new QLChiTietSPServiceImpl();
     private DefaultTableModel dtm = new DefaultTableModel();
     private List<QLSanPham> qLSanPhams = new ArrayList<>();
     private QLSanPhamService qLSanPhamService = new QLSanPhamServiceImpl();
-    
 
     /**
      * Creates new form Final
@@ -65,6 +65,10 @@ public class Final extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         btnShow = new javax.swing.JButton();
         cbbIdSanPham = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtGiaMin = new javax.swing.JTextField();
+        txtGiaMax = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,6 +121,10 @@ public class Final extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setText("Gia Min");
+
+        jLabel7.setText("Gia Max");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,10 +139,6 @@ public class Final extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtMoTa, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtSoLuongTon, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -143,9 +147,23 @@ public class Final extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbbIdSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cbbIdSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtMoTa, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(123, 123, 123)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtGiaMin, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtGiaMax, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 832, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -164,7 +182,9 @@ public class Final extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(cbbIdSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbbIdSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtGiaMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
@@ -172,7 +192,11 @@ public class Final extends javax.swing.JFrame {
                         .addGap(27, 27, 27))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtMoTa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel7)
+                                .addComponent(txtGiaMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtMoTa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
@@ -204,9 +228,9 @@ public class Final extends javax.swing.JFrame {
         String giaBan = txtGiaBan.getText().trim();
         String soLuongTon = txtSoLuongTon.getText().trim();
         QLSanPham idSP = new QLSanPham(getIdSanPham());
-        if(moTa.length() == 0 ||giaBan.length() == 0 || giaNhap.length() == 0 || soLuongTon.length() == 0){
+        if (moTa.length() == 0 || giaBan.length() == 0 || giaNhap.length() == 0 || soLuongTon.length() == 0) {
             JOptionPane.showMessageDialog(this, "Khong duoc de trong");
-        }else{
+        } else {
             QLChiTietSP qlctsp = new QLChiTietSP(idSP, moTa, Integer.valueOf(soLuongTon), Double.valueOf(giaBan), Double.valueOf(giaNhap));
             JOptionPane.showMessageDialog(this, qLChiTietSPService.insertFinal(qlctsp));
             listQLChiTietSP = qLChiTietSPService.getFrmFinal();
@@ -215,7 +239,12 @@ public class Final extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
+        int index = jTable1.getSelectedRow();
+        QLChiTietSP qlctsp = listQLChiTietSP.get(index);
+        QLSanPham qlsp = new QLSanPham(qlctsp.getIdSP().getId());
+        JOptionPane.showMessageDialog(this, qLChiTietSPService.deleteFinal(qlsp));
+        listQLChiTietSP = qLChiTietSPService.getFrmFinal();
+        showData(listQLChiTietSP);
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
@@ -228,31 +257,31 @@ public class Final extends javax.swing.JFrame {
         fillData(row);
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void showData(List<QLChiTietSP> lChiTietSP){
+    private void showData(List<QLChiTietSP> lChiTietSP) {
         dtm.setRowCount(0);
         for (QLChiTietSP x : lChiTietSP) {
             dtm.addRow(x.frmFinal());
         }
     }
-    
-    private void addCbbSanPham(){
+
+    private void addCbbSanPham() {
         for (QLSanPham qlsp : qLSanPhams) {
             cbbIdSanPham.addItem(qlsp.getTen());
         }
     }
-    
-    private UUID getIdSanPham(){
+
+    private UUID getIdSanPham() {
         String tenSanPham = (String) cbbIdSanPham.getSelectedItem();
         UUID id = null;
         for (QLSanPham qlsp : qLSanPhams) {
-            if(qlsp.getTen().equalsIgnoreCase(tenSanPham)){
+            if (qlsp.getTen().equalsIgnoreCase(tenSanPham)) {
                 id = qlsp.getId();
             }
         }
-        return id; 
+        return id;
     }
-    
-    private void fillData(int index){
+
+    private void fillData(int index) {
         QLChiTietSP qlctsp = listQLChiTietSP.get(index);
         cbbIdSanPham.setSelectedItem(qlctsp.getIdSP().getTen());
         txtGiaBan.setText(String.valueOf(qlctsp.getGiaBan()));
@@ -260,6 +289,7 @@ public class Final extends javax.swing.JFrame {
         txtMoTa.setText(qlctsp.getMoTa());
         txtSoLuongTon.setText(String.valueOf(qlctsp.getSoLuongTon()));
     }
+
     /**
      * @param args the command line arguments
      */
@@ -305,9 +335,13 @@ public class Final extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtGiaBan;
+    private javax.swing.JTextField txtGiaMax;
+    private javax.swing.JTextField txtGiaMin;
     private javax.swing.JTextField txtGiaNhap;
     private javax.swing.JTextField txtMoTa;
     private javax.swing.JTextField txtSoLuongTon;

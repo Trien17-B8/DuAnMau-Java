@@ -5,6 +5,7 @@
 package Service;
 
 import ViewModels.QLChiTietSP;
+import ViewModels.QLSanPham;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,5 +28,7 @@ public interface QLChiTietSPService {
     List<QLChiTietSP> getFrmFinal();
     
     String insertFinal(QLChiTietSP qlctsp);
+    
+    String deleteFinal(QLSanPham id);
     
 }

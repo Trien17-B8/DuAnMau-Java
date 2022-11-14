@@ -114,4 +114,14 @@ public class QLChiTietSPServiceImpl implements QLChiTietSPService {
         }
     }
 
+    @Override
+    public String deleteFinal(QLSanPham id) {
+        SanPham idSP = new SanPham(id.getId());
+        if(re.deleteFinal(idSP)){
+            return "Thanh cong";
+        }else{
+            return "That bai";
+        }
+    }
+
 }

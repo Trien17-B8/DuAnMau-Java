@@ -5,6 +5,7 @@
 package Repository;
 
 import DomainModels.ChiTietSP;
+import DomainModels.SanPham;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,5 +30,7 @@ public interface IChiTietSPRepository {
     List<ChiTietSP> getFrmFinal();
     
     boolean insertFinal(ChiTietSP chiTietSP);
+    
+    boolean deleteFinal(SanPham id);
     
 }

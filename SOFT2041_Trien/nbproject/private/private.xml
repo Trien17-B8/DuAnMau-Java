@@ -4,6 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/G:/CNTT_Trien/DuAnMau-Java/SOFT2041_Trien/src/Views/Final.java</file>
+            <file>file:/G:/CNTT_Trien/DuAnMau-Java/SOFT2041_Trien/src/Service/QLChiTietSPService.java</file>
+            <file>file:/G:/CNTT_Trien/DuAnMau-Java/SOFT2041_Trien/src/Repository/ChiTietSPRepository.java</file>
+            <file>file:/G:/CNTT_Trien/DuAnMau-Java/SOFT2041_Trien/src/Service/Impl/QLChiTietSPServiceImpl.java</file>
+            <file>file:/G:/CNTT_Trien/DuAnMau-Java/SOFT2041_Trien/src/Repository/IChiTietSPRepository.java</file>
+            <file>file:/G:/CNTT_Trien/DuAnMau-Java/SOFT2041_Trien/src/Views/FrmChiTietSP.java</file>
         </group>
     </open-files>
 </project-private>

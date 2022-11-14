@@ -215,11 +215,25 @@ public class ChiTietSPRepository implements IChiTietSPRepository {
         } catch (SQLException sqle) {
             sqle.printStackTrace(System.out);
         }
-        return check >0;
+        return check > 0;
     }
 
     public static void main(String[] args) {
 
         System.out.println(new ChiTietSPRepository().getFrmFinal());
+    }
+
+    @Override
+    public boolean deleteFinal(SanPham id) {
+        String query = "DELETE FROM [dbo].[ChiTietSP] "
+                + "      WHERE SanPham.Id = ?";
+        int check = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, id.getId());
+            check = ps.executeUpdate();
+        } catch (SQLException sqle) {
+            sqle.printStackTrace(System.out);
+        }
+        return check > 0;
     }
 }
